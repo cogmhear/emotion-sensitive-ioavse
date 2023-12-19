@@ -1,0 +1,29 @@
+
+root: /scratch/prj/aispehea/thussain/datasets/mosei/Raw/Videos/Full/segmented_4s_30fps_noisy_audio/ # EDIT_THIS - this should match the path defined in data_preparation/avse1/data_config.yaml
+dataset: dev
+target: ${root}/${dataset}/scenes # path containig the clean target files
+target_suffix: '_target' # format of target files: SXXXXX_target.wav
+
+##enhanced_root: /scratch/prj/aispehea/thussain/codes/AVSEC2/avsec2_enhanced_data/model_unet_transformer/logs_recent/Fea-Mag/loss_stoi
+##enhanced_root: /scratch/prj/aispehea/thussain/codes/AVSEC2/avsec2_enhanced_data/model_unet_transformer/logs_recent/Fea-Mag/loss_mod_loss
+
+enhanced_root: /scratch/prj/aispehea/thussain/codes/AVSEC2/avsec2_enhanced_data/model_unet_transformer/logs_recent/Fea-Mag/loss_mod_loss
+
+enhanced: ${enhanced_root}/devset/ # path containing your enhanced files -- EDIT_THIS
+enhanced_suffix: '_enhanced' # format of enhanced files: SXXXXX_mixed.wav -- EDIT_THIS
+scenes_names: ${root}/metadata/scenes.${dataset}.json
+metrics_results: ${root}/objective_evaluation/ # output directory where results will be written
+
+fs: 16000
+
+objective_metrics:
+  fs: ${fs}
+  mode: 'wb'
+
+defaults:
+  - override hydra/job_logging: disabled
+
+hydra:
+  output_subdir: Null
+  run:
+    dir: .
